@@ -1,0 +1,20 @@
+{
+  "name": "visionsearch-local-demo",
+  "version": "1.0.0",
+  "description": "Local CBIR-style image search demo with IndexedDB storage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "cbir",
+    "indexeddb",
+    "frontend",
+    "node",
+    "image-search"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}

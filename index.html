@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionSearch Local Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="logo">
+            <i data-lucide="scan-search"></i>
+            <span>VisionSearch</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li class="nav-item active" data-view="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    Dashboard
+                </li>
+                <li class="nav-item" data-view="analytics">
+                    <i data-lucide="bar-chart-3"></i>
+                    Thống kê
+                </li>
+                <li class="nav-item" data-view="model">
+                    <i data-lucide="workflow"></i>
+                    Kiến trúc
+                </li>
+                <li class="nav-item" data-view="arena">
+                    <i data-lucide="swords"></i>
+                    So khớp
+                </li>
+            </ul>
+        </nav>
+
+        <div class="samples-panel">
+            <p class="samples-title">
+                <i data-lucide="image"></i>
+                Bộ mẫu cục bộ
+            </p>
+            <ul class="sample-list">
+                <li><a href="#" class="sample-link" data-filter="SIFT"><span class="badge badge-sift">SIFT</span>Cảnh quan và động vật</a></li>
+                <li><a href="#" class="sample-link" data-filter="ORB"><span class="badge badge-orb">ORB</span>Đồ vật nhiều cạnh</a></li>
+                <li><a href="#" class="sample-link" data-filter="COLOR"><span class="badge badge-color">COLOR</span>Ảnh giàu màu sắc</a></li>
+                <li><a href="#" class="sample-link" data-filter="CNN"><span class="badge badge-cnn">CNN</span>Ngữ nghĩa tổng quát</a></li>
+            </ul>
+            <button id="clearDbBtn" class="btn-clear">
+                <i data-lucide="rotate-cw"></i>
+                Reset dữ liệu mẫu
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div class="search-bar">
+                <i data-lucide="search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm theo tên, tag hoặc thuật toán">
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+                <button id="themeToggle" class="btn-secondary">Dark</button>
+                <button class="btn-primary" id="uploadBtn">
+                    <i data-lucide="image-plus"></i>
+                    Thêm ảnh truy vấn
+                </button>
+            </div>
+        </header>
+
+        <div id="toastContainer" class="toast"></div>
+
+        <section id="dashboardView" class="view-section">
+            <div class="sticky-stats-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p class="label">Tổng bản ghi</p>
+                        <p class="value" id="totalRecords">0</p>
+                    </div>
+                    <div class="stat-card" style="border-top: 3px solid #10b981;">
+                        <p class="label">SIFT</p>
+                        <p class="value" id="countSift" style="color:#10b981;">0</p>
+                    </div>
+                    <div class="stat-card" style="border-top: 3px solid #3b82f6;">
+                        <p class="label">ORB</p>
+                        <p class="value" id="countOrb" style="color:#3b82f6;">0</p>
+                    </div>
+                    <div class="stat-card" style="border-top: 3px solid #f59e0b;">
+                        <p class="label">COLOR</p>
+                        <p class="value" id="countColor" style="color:#f59e0b;">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filters">
+                <div class="filter-chip active" data-filter="all">Tất cả</div>
+                <div class="filter-chip" data-filter="SIFT">SIFT</div>
+                <div class="filter-chip" data-filter="ORB">ORB</div>
+                <div class="filter-chip" data-filter="COLOR">Color</div>
+                <div class="filter-chip" data-filter="CNN">CNN</div>
+            </div>
+
+            <div class="records-grid" id="recordsGrid"></div>
+        </section>
+
+        <section id="analyticsView" class="view-section" style="display:none;">
+            <div style="display:flex; gap:0.75rem; margin-bottom:1.5rem;">
+                <button id="exportCsvBtn" class="btn-secondary">Export CSV</button>
+                <button id="exportPdfBtn" class="btn-secondary">Print / PDF</button>
+            </div>
+
+            <div class="chart-row">
+                <div class="stat-card chart-card">
+                    <h3 class="chart-title">Tỷ lệ phân bổ thuật toán</h3>
+                    <div class="chart-wrap"><canvas id="typeChart"></canvas></div>
+                </div>
+                <div class="stat-card chart-card">
+                    <h3 class="chart-title">Độ trễ giả lập</h3>
+                    <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="chart-row" style="margin-top:2rem;">
+                <div class="stat-card chart-card">
+                    <h3 class="chart-title">Match score trung bình</h3>
+                    <div class="chart-wrap"><canvas id="accuracyChart"></canvas></div>
+                </div>
+                <div class="stat-card chart-card">
+                    <h3 class="chart-title">So sánh đặc tính</h3>
+                    <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="stat-card chart-card" style="margin-top:2rem;">
+                <h3 class="chart-title">Tần suất nhãn</h3>
+                <div class="chart-wrap" style="height:320px;"><canvas id="freqChart"></canvas></div>
+            </div>
+
+            <div class="stat-card" style="margin-top:2rem;overflow-x:auto;">
+                <h3 style="margin-bottom:1rem;">Nhật ký truy vấn</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên</th>
+                            <th>Thuật toán</th>
+                            <th>Thông tin đặc trưng</th>
+                            <th>Ngày tạo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summaryTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="modelView" class="view-section" style="display:none;">
+            <h2 style="margin-bottom:0.5rem;">Kiến trúc thực tế của project</h2>
+            <p style="color:var(--text-muted);margin-bottom:2rem;">Ứng dụng này là local demo: Node.js chỉ serve file tĩnh, toàn bộ nghiệp vụ và lưu trữ chạy trong trình duyệt.</p>
+
+            <div class="stat-card" style="padding:1.5rem 0.5rem;">
+                <div class="system-flow">
+                    <div class="flow-node client-node">
+                        <div class="node-icon"><i data-lucide="monitor"></i></div>
+                        <div class="node-content">
+                            <h5>Browser UI</h5>
+                            <p>HTML, CSS, JavaScript, Chart.js</p>
+                        </div>
+                    </div>
+                    <div class="flow-arrow"><i data-lucide="chevrons-right"></i></div>
+                    <div class="flow-node api-node">
+                        <div class="node-icon"><i data-lucide="server"></i></div>
+                        <div class="node-content">
+                            <h5>Node Static Server</h5>
+                            <p>Serve file root và thư mục public</p>
+                        </div>
+                    </div>
+                    <div class="flow-arrow"><i data-lucide="chevrons-right"></i></div>
+                    <div class="flow-node opencv-node">
+                        <div class="node-icon"><i data-lucide="database"></i></div>
+                        <div class="node-content">
+                            <h5>IndexedDB Local</h5>
+                            <p>Lưu record, metadata, ảnh upload</p>
+                        </div>
+                    </div>
+                    <div class="flow-arrow"><i data-lucide="chevrons-right"></i></div>
+                    <div class="flow-node db-node">
+                        <div class="node-icon"><i data-lucide="sparkles"></i></div>
+                        <div class="node-content">
+                            <h5>Heuristic Matching</h5>
+                            <p>So khớp màu + tag + loại thuật toán</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card" style="margin-top:2rem; padding:1.5rem 0.5rem;">
+                <div class="db-schema-grid">
+                    <div class="schema-card">
+                        <div class="schema-header">
+                            <i data-lucide="table-properties"></i>
+                            <h5>records</h5>
+                        </div>
+                        <ul class="schema-fields">
+                            <li><span class="field-name">id</span> <span class="field-type">autoIncrement</span></li>
+                            <li><span class="field-name">patientName</span> <span class="field-type">string</span></li>
+                            <li><span class="field-name">type</span> <span class="field-type">SIFT | ORB | COLOR | CNN</span></li>
+                            <li><span class="field-name">diagnosis</span> <span class="field-type">string</span></li>
+                            <li><span class="field-name">imageData</span> <span class="field-type">data URL / local path</span></li>
+                            <li><span class="field-name">colorCentroid</span> <span class="field-type">RGB object</span></li>
+                            <li><span class="field-name">tags</span> <span class="field-type">string[]</span></li>
+                            <li><span class="field-name">createdAt</span> <span class="field-type">ISO string</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="arenaView" class="view-section" style="display:none;">
+            <h2 style="margin-bottom:0.5rem; font-size:1.6rem; color:#fff;">So sánh so khớp ảnh</h2>
+            <p style="color:var(--text-muted); margin-bottom:2rem;">Ảnh truy vấn được phân tích màu trung bình và gợi ý tag để tạo bảng xếp hạng so khớp cục bộ.</p>
+
+            <div class="stat-card" style="margin-bottom:2rem; padding:2rem;">
+                <h3 style="margin-bottom:1.5rem; color:#fff; display:flex; align-items:center; gap:0.5rem;">
+                    <i data-lucide="image-plus" style="color:var(--primary)"></i>
+                    Chọn ảnh đối chiếu
+                </h3>
+                <form id="arenaForm" style="display:grid; grid-template-columns: 2fr 1fr auto; gap:1.5rem; align-items:end;">
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Tải ảnh truy vấn</label>
+                        <input type="file" id="arenaFile" accept="image/*" required style="padding:0.6rem 1rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label>Số lượng ảnh trả về</label>
+                        <input type="number" id="arenaTopN" value="3" min="1" max="10" required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="arenaSubmitBtn" style="padding:0.9rem 2rem; border-radius:var(--radius-md);">
+                        <i data-lucide="swords"></i>
+                        Bắt đầu
+                    </button>
+                </form>
+            </div>
+
+            <div id="arenaQueryPreview" style="display:none; margin-bottom:2rem; padding:1.5rem; background:rgba(30, 41, 59, 0.4); border:1px solid var(--border); border-radius:var(--radius-lg); text-align:center;">
+                <h4 style="color:#fff; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                    <i data-lucide="image" style="color:var(--primary)"></i>
+                    Ảnh truy vấn
+                </h4>
+                <div style="width:200px; height:150px; margin:0 auto; border-radius:var(--radius-md); overflow:hidden; border:2px solid var(--primary); box-shadow:0 0 20px var(--primary-glow);">
+                    <img id="arenaQueryImg" src="" alt="Query preview" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+
+            <div id="arenaScanning" style="display:none; text-align:center; padding:3rem; background:var(--surface); border:1px dashed var(--primary); border-radius:var(--radius-lg); margin-bottom:2rem; position:relative; overflow:hidden;">
+                <div class="scanner-line" style="position:absolute; left:0; width:100%; height:4px; background:linear-gradient(90deg, transparent, var(--primary), transparent); animation: scanMotion 2s infinite ease-in-out;"></div>
+                <i data-lucide="aperture" class="spin" style="width:48px; height:48px; color:var(--primary); margin-bottom:1rem;"></i>
+                <h4 style="color:#fff; margin-bottom:0.5rem;">Đang phân tích màu và gợi ý tag...</h4>
+                <p style="color:var(--text-muted); font-size:0.9rem;">Không dùng model server-side. Kết quả được xếp hạng cục bộ trong trình duyệt.</p>
+            </div>
+
+            <div class="arena-grid" id="arenaGrid" style="display:none; grid-template-columns: repeat(4, 1fr); gap:1.5rem;">
+                <div class="arena-col" style="border-top:4px solid var(--accent-sift);">
+                    <div class="arena-col-header" style="background:rgba(16, 185, 129, 0.05); padding:1rem; border-bottom:1px solid var(--border); text-align:center;">
+                        <span class="badge badge-sift">SIFT</span>
+                        <h4 style="margin-top:0.5rem; color:#fff;">Keypoint bias</h4>
+                        <div class="arena-col-stats" id="siftArenaStats" style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; font-family:monospace;"></div>
+                    </div>
+                    <div class="arena-col-results" id="siftArenaResults" style="padding:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+                </div>
+
+                <div class="arena-col" style="border-top:4px solid var(--accent-orb);">
+                    <div class="arena-col-header" style="background:rgba(59, 130, 246, 0.05); padding:1rem; border-bottom:1px solid var(--border); text-align:center;">
+                        <span class="badge badge-orb">ORB</span>
+                        <h4 style="margin-top:0.5rem; color:#fff;">Fast bias</h4>
+                        <div class="arena-col-stats" id="orbArenaStats" style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; font-family:monospace;"></div>
+                    </div>
+                    <div class="arena-col-results" id="orbArenaResults" style="padding:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+                </div>
+
+                <div class="arena-col" style="border-top:4px solid var(--accent-color);">
+                    <div class="arena-col-header" style="background:rgba(245, 158, 11, 0.05); padding:1rem; border-bottom:1px solid var(--border); text-align:center;">
+                        <span class="badge badge-color">COLOR</span>
+                        <h4 style="margin-top:0.5rem; color:#fff;">Color bias</h4>
+                        <div class="arena-col-stats" id="colorArenaStats" style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; font-family:monospace;"></div>
+                    </div>
+                    <div class="arena-col-results" id="colorArenaResults" style="padding:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+                </div>
+
+                <div class="arena-col" style="border-top:4px solid var(--accent-cnn);">
+                    <div class="arena-col-header" style="background:rgba(139, 92, 246, 0.05); padding:1rem; border-bottom:1px solid var(--border); text-align:center;">
+                        <span class="badge badge-cnn">CNN</span>
+                        <h4 style="margin-top:0.5rem; color:#fff;">Semantic bias</h4>
+                        <div class="arena-col-stats" id="cnnArenaStats" style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; font-family:monospace;"></div>
+                    </div>
+                    <div class="arena-col-results" id="cnnArenaResults" style="padding:1rem; display:flex; flex-direction:column; gap:1rem;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="scrollTopBtn" title="Về đầu trang">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+    <div class="modal-backdrop" id="uploadModal">
+        <div class="modal">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h2>Thêm ảnh truy vấn mới</h2>
+                <button id="closeModal" style="background:none;border:none;cursor:pointer;color:var(--text-muted);">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>Tên bản ghi</label>
+                    <input type="text" id="patientName" placeholder="Ví dụ: Chó ngoài trời, xe đỏ...">
+                </div>
+                <div class="form-group">
+                    <label>Thuật toán ưu tiên</label>
+                    <select id="scanType">
+                        <option value="SIFT">SIFT</option>
+                        <option value="ORB">ORB</option>
+                        <option value="COLOR">COLOR</option>
+                        <option value="CNN">CNN</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Top N mong muốn</label>
+                    <input type="number" id="diagnosis" value="10" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label>Chọn ảnh</label>
+                    <input type="file" id="imageFile" accept="image/*" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelBtn">Hủy</button>
+                    <button type="submit" class="btn-primary">
+                        <i data-lucide="search"></i>
+                        Phân tích và lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="detailModal">
+        <div class="detail-modal-content">
+            <div class="detail-viewer" style="position:relative;">
+                <button class="btn-close-detail" id="closeDetailModal" style="z-index:10;">
+                    <i data-lucide="x"></i>
+                </button>
+                <div id="keypointsContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5; overflow:hidden;"></div>
+                <img id="detailImage" src="" alt="Matched image" style="display:block;">
+            </div>
+            <div class="detail-info">
+                <div class="detail-header">
+                    <span class="type-tag" id="detailType"></span>
+                    <h2 id="detailPatientName"></h2>
+                    <p class="date" id="detailDate"></p>
+                </div>
+
+                <div class="detail-section">
+                    <h4>Thông tin đặc trưng</h4>
+                    <p id="detailDiagnosis" style="font-family:monospace;background:var(--surface);padding:1rem;border-radius:8px;"></p>
+                </div>
+
+                <div class="detail-section">
+                    <h4>ID lưu trữ cục bộ</h4>
+                    <p id="detailId"></p>
+                </div>
+
+                <div class="detail-actions" style="display:flex; gap:1rem;">
+                    <button class="btn-primary" onclick="window.print()">
+                        <i data-lucide="printer"></i>
+                        In nhanh
+                    </button>
+                    <button class="btn-clear" id="deleteBtn" style="width:auto; padding:0.85rem 1.5rem; font-size:0.95rem; border-radius:var(--radius-xl); margin-top:0; display:flex; align-items:center; gap:0.5rem;">
+                        <i data-lucide="trash-2"></i>
+                        Xóa bản ghi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

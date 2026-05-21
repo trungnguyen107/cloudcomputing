@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Van Phuc,R001,X-RAY,Respiratory,Viêm phổi thùy dưới phải (Right Lower Lobe Pneumonia),2024-01-09,Bệnh nhân 38 tuổi - ho sốt 5 ngày
+Tran Thi Bao,R002,X-RAY,Respiratory,Lao phổi hoạt động (Active Pulmonary Tuberculosis),2024-01-24,Bệnh nhân 30 tuổi - ho máu
+Le Thanh Tung,R003,CT,Respiratory,COVID-19 Viêm phổi nặng (COVID-19 Severe Pneumonia),2024-02-07,Bệnh nhân 55 tuổi - SpO2 88%
+Pham Ngoc Ha,R004,X-RAY,Respiratory,Hen phế quản nặng (Severe Bronchial Asthma),2024-02-21,Bệnh nhân 20 tuổi - khó thở cấp
+Hoang Van Dung,R005,CT,Respiratory,COPD nặng (Severe COPD),2024-03-06,Bệnh nhân 64 tuổi - hút thuốc 30 năm
+Do Thi Thu Ha,R006,X-RAY,Respiratory,Ung thư phổi nguyên phát (Primary Lung Carcinoma),2024-03-20,Bệnh nhân 59 tuổi - phát hiện tình cờ
+Vu Dinh Khanh,R007,CT,Respiratory,Giãn phế quản (Bronchiectasis),2024-04-03,Bệnh nhân 45 tuổi - ho đờm mãn tính
+Ngo Thi Lan,R008,X-RAY,Respiratory,Tràn dịch màng phổi (Pleural Effusion),2024-04-17,Bệnh nhân 72 tuổi - ung thư di căn

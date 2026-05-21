@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Bao Chau,E001,CT,Emergency,Xuất huyết não (Intracranial Hemorrhage),2024-01-03,Bệnh nhân 45 tuổi - chấn thương đầu nặng
+Tran Quoc Hung,E002,X-RAY,Emergency,Tràn khí màng phổi (Pneumothorax),2024-01-17,Bệnh nhân 29 tuổi - tai nạn xe máy
+Le Thi Thanh,E003,CT,Emergency,Vỡ lách (Splenic Rupture),2024-02-02,Bệnh nhân 34 tuổi - chấn thương bụng
+Pham Van Kien,E004,X-RAY,Emergency,Trật khớp vai (Shoulder Dislocation),2024-02-16,Bệnh nhân 22 tuổi - ngã khi chơi thể thao
+Hoang Thi Quynh,E005,CT,Emergency,Tắc ruột cấp (Acute Intestinal Obstruction),2024-03-01,Bệnh nhân 50 tuổi - đau bụng dữ dội
+Do Van Lam,E006,CT,Emergency,Phình động mạch vỡ (Ruptured Aneurysm),2024-03-14,Bệnh nhân 68 tuổi - đau đầu đột ngột
+Vu Ngoc Huyen,E007,X-RAY,Emergency,Gãy cổ xương đùi (Hip Fracture),2024-03-28,Bệnh nhân 78 tuổi - ngã tại nhà
+Dang Minh Tuan,E008,CT,Emergency,Chấn thương cột sống cổ (Cervical Spine Injury),2024-04-11,Bệnh nhân 31 tuổi - tai nạn xe đạp

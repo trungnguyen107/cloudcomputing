@@ -1,0 +1,2 @@
+node server.js
+mo http://localhost:3080

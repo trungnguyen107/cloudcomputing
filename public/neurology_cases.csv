@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Thi Linh,N001,MRI,Neurology,Xuất huyết dưới nhện (Subarachnoid Hemorrhage),2024-01-06,Bệnh nhân 44 tuổi - đau đầu sấm sét
+Tran Van Long,N002,MRI,Neurology,U màng não (Meningioma),2024-01-21,Bệnh nhân 52 tuổi - co giật
+Le Hoang Nam,N003,MRI,Neurology,Bệnh Parkinson (Parkinson's Disease),2024-02-08,Bệnh nhân 70 tuổi - run tay tiến triển
+Pham Thi Thuy,N004,MRI,Neurology,Động kinh (Epilepsy - Temporal Lobe),2024-02-22,Bệnh nhân 27 tuổi - co giật tái phát
+Hoang Minh Duc,N005,CT,Neurology,Nhồi máu não diện rộng (Large Ischemic Stroke),2024-03-07,Bệnh nhân 61 tuổi - liệt nửa người
+Do Ngoc Linh,N006,MRI,Neurology,Đa xơ cứng (Multiple Sclerosis),2024-03-21,Bệnh nhân 32 tuổi - rối loạn thị giác
+Vu Thi Phuong,N007,MRI,Neurology,Bệnh Alzheimer (Alzheimer's Disease),2024-04-04,Bệnh nhân 75 tuổi - suy giảm nhận thức
+Bui Quang Minh,N008,CT,Neurology,Tụ máu ngoài màng cứng (Epidural Hematoma),2024-04-18,Bệnh nhân 25 tuổi - chấn thương đầu

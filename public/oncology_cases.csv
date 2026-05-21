@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Phu Quoc,O001,CT,Oncology,Ung thư phổi giai đoạn II (Lung Cancer Stage II),2024-01-14,Bệnh nhân 55 tuổi - hút thuốc 20 năm
+Tran Bich Ngoc,O002,MRI,Oncology,U não ác tính (Glioblastoma GBM),2024-01-28,Bệnh nhân 48 tuổi - đau đầu kéo dài
+Le Van Trung,O003,CT,Oncology,Ung thư đại tràng (Colorectal Cancer),2024-02-11,Bệnh nhân 63 tuổi - theo dõi sau phẫu thuật
+Pham Thi Hoa,O004,MRI,Oncology,Ung thư vú di căn hạch (Breast Cancer Metastasis),2024-02-25,Bệnh nhân 42 tuổi - hóa trị liệu
+Hoang Van Nam,O005,CT,Oncology,Ung thư gan (Hepatocellular Carcinoma),2024-03-09,Bệnh nhân 57 tuổi - xơ gan nền
+Do Thi Khanh,O006,CT,Oncology,U tuyến giáp (Thyroid Nodule - Malignant),2024-03-23,Bệnh nhân 38 tuổi - khối u cổ
+Bui Quang Huy,O007,MRI,Oncology,Sarcoma mô mềm đùi (Soft Tissue Sarcoma),2024-04-06,Bệnh nhân 35 tuổi - sinh thiết
+Vo Minh Tam,O008,CT,Oncology,Ung thư tụy (Pancreatic Adenocarcinoma),2024-04-20,Bệnh nhân 67 tuổi - đau thượng vị

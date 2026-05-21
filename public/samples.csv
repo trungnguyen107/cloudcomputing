@@ -1,0 +1,6 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,ImageDataUrl
+Nguyen Van A,P001,X-RAY,Chest,Pneumonia,2024-05-10,
+Tran Thi B,P002,MRI,Brain,Normal,2024-05-11,
+Le Van C,P003,CT,Abdomen,Appendicitis,2024-05-12,
+Pham Minh D,P004,X-RAY,Bone,Fracture,2024-05-13,
+Hoang Anh E,P005,MRI,Spine,Herniated Disc,2024-05-14,

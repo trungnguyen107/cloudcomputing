@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Thi Lan,C001,CT,Cardiology,Phình động mạch chủ (Aortic Aneurysm),2024-01-08,Bệnh nhân 65 tuổi - đau ngực đột ngột
+Tran Van Binh,C002,CT,Cardiology,Nhồi máu cơ tim (Myocardial Infarction),2024-01-20,Bệnh nhân 58 tuổi - cấp cứu
+Le Thi Thu,C003,CT,Cardiology,Huyết khối tĩnh mạch sâu (DVT),2024-02-05,Bệnh nhân 47 tuổi - phù chân phải
+Pham Minh Hieu,C004,X-RAY,Cardiology,Phì đại tim (Cardiomegaly),2024-02-19,Bệnh nhân 72 tuổi - suy tim mạn
+Hoang Thi Xuan,C005,CT,Cardiology,Tràn dịch màng tim (Pericardial Effusion),2024-03-10,Bệnh nhân 53 tuổi - khó thở
+Do Tuan Anh,C006,CT,Cardiology,Hẹp van hai lá (Mitral Stenosis),2024-03-25,Bệnh nhân 61 tuổi - theo dõi định kỳ
+Vu Thi Hoa,C007,X-RAY,Cardiology,Phù phổi cấp (Acute Pulmonary Edema),2024-04-08,Bệnh nhân 66 tuổi - cấp cứu
+Ngo Quang Vinh,C008,CT,Cardiology,Bóc tách động mạch chủ (Aortic Dissection),2024-04-22,Bệnh nhân 60 tuổi - cao huyết áp

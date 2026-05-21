@@ -1,0 +1,9 @@
+PatientName,PatientCode,Modality,DiseaseType,Diagnosis,CaptureDate,Notes
+Nguyen Van An,P001,X-RAY,Orthopaedics,Gãy xương quay trái (Radius Fracture),2024-01-05,Bệnh nhân 45 tuổi - tai nạn giao thông
+Tran Minh Quan,P002,X-RAY,Orthopaedics,Gãy xương đòn (Clavicle Fracture),2024-01-12,Bệnh nhân 28 tuổi - té ngã
+Le Thi Huong,P003,X-RAY,Orthopaedics,Thoái hóa khớp gối (Knee Osteoarthritis),2024-02-03,Bệnh nhân 62 tuổi - mãn tính
+Pham Anh Tuan,P004,X-RAY,Orthopaedics,Gãy xương mắt cá (Ankle Fracture),2024-02-18,Bệnh nhân 33 tuổi - chấn thương thể thao
+Ho Ngoc Bich,P005,X-RAY,Orthopaedics,Thoát vị đĩa đệm thắt lưng (Lumbar Disc Herniation),2024-03-07,Bệnh nhân 50 tuổi - đau lưng mãn tính
+Vu Thanh Long,P006,X-RAY,Orthopaedics,Gãy xương đùi (Femur Fracture),2024-03-22,Bệnh nhân 70 tuổi - ngã trong nhà
+Dang Thi Mai,P007,X-RAY,Orthopaedics,Viêm khớp dạng thấp bàn tay (Rheumatoid Arthritis),2024-04-01,Bệnh nhân 55 tuổi - điều trị dài hạn
+Bui Van Duc,P008,X-RAY,Orthopaedics,Gãy xương sườn (Rib Fracture),2024-04-15,Bệnh nhân 40 tuổi - tai nạn lao động
